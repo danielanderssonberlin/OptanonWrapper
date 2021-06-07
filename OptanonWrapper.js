@@ -4,15 +4,15 @@ function OptanonWrapper() {
         var prefpc = document.getElementById("onetrust-pc-sdk");
         prefpc.style = "display: block !important;";
     }
-    if(document.querySelectorAll('.ot-sdk-column .save-preference-btn-handler').length < 1){
-        let clone = document.querySelector('.save-preference-btn-handler').cloneNode( true );
-        document.querySelector ('.ot-sdk-column ').style.display = "flex";
-        document.querySelector('.ot-sdk-column').appendChild( clone );
-        var events = getEventListeners(document.querySelectorAll('.save-preference-btn-handler')[1]);
-        for(var p in events) {
-        events[p].forEach(function(ev) {
-                document.querySelector('.save-preference-btn-handler').addEventListener(p, ev.listener, ev.useCapture);
-            });
-        }
+    if (!document.getElementById('ot-confirm-my-choices')) {
+        var newNode = document.createElement("BUTTON");
+        newNode.setAttribute('aria-label', "Confirm my choices");
+        newNode.setAttribute('id', "ot-confirm-my-choices");
+        newNode.setAttribute('class', "save-preference-btn-handler onetrust-close-btn-handler");
+        newNode.setAttribute('tabindex', 0);
+        newNode.innerHTML = "Confirm Selection";
+        newNode.setAttribute('onclick', "OneTrust.Close()");
+        var referenceNode = document.querySelector('.ot-sdk-column');
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
     }
 }
