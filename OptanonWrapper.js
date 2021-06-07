@@ -1,11 +1,10 @@
-let executed = 0;
 function OptanonWrapper() {
     if (!OneTrust.IsAlertBoxClosedAndValid()) {
         // Hide the banner on the geolocation rule first!
         var prefpc = document.getElementById("onetrust-pc-sdk");
         prefpc.style = "display: block !important;";
     }
-    if(executed == 0){
+    if(document.querySelectorAll('.ot-sdk-column .save-preference-btn-handler').length < 1){
         let clone = document.querySelector('.save-preference-btn-handler').cloneNode( true );
         document.querySelector ('.ot-sdk-column ').style.display = "flex";
         document.querySelector('.ot-sdk-column').appendChild( clone );
@@ -15,6 +14,5 @@ function OptanonWrapper() {
                 document.querySelector('.save-preference-btn-handler').addEventListener(p, ev.listener, ev.useCapture);
             });
         }
-    executed = 1;
     }
 }
